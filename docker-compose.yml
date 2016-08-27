@@ -1,0 +1,18 @@
+version: "2"
+services:
+  apache:
+      build:
+          context: ./apache
+      ports:
+          - "8080:80"
+      volumes:
+          - ./app:/var/www/html/public
+      links:
+          - db
+  db:
+      image: mysql
+      environment:
+          - MYSQL_ROOT_PASSWORD=root
+          - MYSQL_DATABASE=laravel
+      volumes:
+          - ./database:/var/lib/mysql
